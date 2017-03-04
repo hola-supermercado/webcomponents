@@ -1,0 +1,6 @@
+{
+  "name": "web-backup",
+  "short_name": "web-backup",
+  "start_url": "/",
+  "display": "standalone"
+}

@@ -1,0 +1,137 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/google-map/google-map.html">
+
+
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
+
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="web-backup-app">
+  <template>
+    <style>
+      google-map {
+        height: 736px;
+      }
+
+
+    </style>
+    <style is="custom-style">
+
+
+      paper-dialog.size-position {
+        position: fixed;
+        bottom: 0px;
+        right: 0px;
+        width: 414px;
+        height: 100px;
+        overflow: auto;
+        margin:0;
+      }
+    </style>
+
+    <iron-pages selected="0">
+      <div>
+    <google-map disable-default-ui on-tap="open" latitude="{{lat}}" longitude="{{lon}}" zoom="15" api-key="AIzaSyDVzFXpV8VxfUstBV1A-5OA9jK0uudrTAE"></google-map>
+      </div>
+      <div>
+        <h2 style="text-align: center; text-decoration: underline;">Select Bank Account</h2>
+    <paper-listbox style="font-family: 'Helvetica Neue'">
+      <paper-item style="text-align: center;">
+        <paper-item-body two-line >
+          <div>
+            <p>Miss. C.G. Veelenturf</p>
+
+            <p style="color:darkblue;">NL12INGB000873246</p>
+          </div>
+          <div>
+            <h1>€ 2.567</h1>
+          </div>
+        </paper-item-body>
+      </paper-item>
+      <paper-item style="color:white;background-color: #69BFEE; margin:0;">
+        <paper-item-body two-line on-tap="open" >
+          <div>
+            <h4>Withdraw Amount</h4>
+          </div>
+          <div>
+            <h1>distance 11 meter</h1>
+          </div>
+        </paper-item-body>
+      </paper-item>
+      <paper-item>
+        <paper-item-body  >
+          <div>
+            <paper-button style="width:50%;height:100px;font-size: 100%">10</paper-button>
+            <paper-button style="width:50%;height:100px;font-size: 100%">100</paper-button>
+
+          </div>
+          <div>
+            <paper-button style="width:50%;height:100px;font-size: large">20</paper-button>
+            <paper-button style="width:50%;height:100px;font-size: large">200</paper-button>
+
+          </div>
+          <div>
+            <paper-button style="width:50%;height:100px;font-size: large">50</paper-button>
+            <paper-button style="width:50%;height:100px;font-size: large">500</paper-button>
+          </div>
+        </paper-item-body>
+      </paper-item>
+    </paper-listbox>
+      </div>
+
+
+
+    </iron-pages>
+
+    <paper-dialog dynamic-align="true" id="dialog" class="size-position">
+      <h3>Withdraw {{prop1}} euros</h3>
+
+
+      <paper-button dialog-dismiss>Cancel</paper-button>
+      <paper-button dialog-confirm autofocus on-tap="nextpage">Withdraw</paper-button>
+      </div>
+    </paper-dialog>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'web-backup-app',
+
+      properties: {
+        prop1: {
+          type: Number,
+            value:50
+        },
+          lon:String,
+          lat:String
+      },
+        created:function(){
+
+          var _this = this;
+            navigator.geolocation.getCurrentPosition(function(position){
+
+               _this.lon = position.coords.longitude;
+               _this.lat = position.coords.latitude;
+
+            })
+        },
+        open:function(){
+
+            var dialog =document.querySelector('#dialog')
+            dialog.open()
+        },
+        nextpage:function(){
+            var pages = document.querySelector('iron-pages')
+            pages.selectNext()
+        }
+
+    });
+  </script>
+</dom-module>
