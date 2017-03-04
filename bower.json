@@ -7,7 +7,8 @@
     "paper-elements": "PolymerElements/paper-elements#^1.0.7",
     "app-layout": "PolymerElements/app-layout#^0.10.6",
     "iron-pages": "PolymerElements/iron-pages#^1.0.8",
-    "l2t-paper-slider": "^1.2.8"
+    "l2t-paper-slider": "^1.2.8",
+    "iron-ajax": "PolymerElements/iron-ajax#^1.4.3"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

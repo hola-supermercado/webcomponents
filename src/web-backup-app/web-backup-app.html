@@ -12,17 +12,19 @@
 
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../bower_components/l2t-paper-slider/l2t-paper-slider.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="web-backup-app">
     <template>
-    <style>
+        <style>
       google-map {
         height: 736px;
       }
 
 
-    </style>
-    <style is="custom-style">
+
+        </style>
+        <style is="custom-style">
 
 
       paper-dialog.size-position {
@@ -41,90 +43,120 @@
         --paper-slide-dot: rgb(160, 195, 210);
         --paper-slide-dot-selected: rgb(60, 60, 100);
       }
-    </style>
 
-    <iron-pages selected="0">
-      <div>
-    <google-map disable-default-ui on-tap="open" latitude="{{lat}}" longitude="{{lon}}" zoom="15" api-key="AIzaSyDVzFXpV8VxfUstBV1A-5OA9jK0uudrTAE"></google-map>
-      </div>
-      <div>
-      <h2 style="text-align: center; color: grey; border-top: 0.5px solid rgb(160, 195, 210); border-bottom: 0.5px solid rgb(160, 195, 210); font-size: 16px; padding: 10px 0px 10px 0px;">Selected Bank Account</h2>
-    <paper-listbox style="font-family: 'Helvetica Neue'">
-      <l2t-paper-slider class="accountSlides" total-slides="3">
-        <paper-slide>
-          <paper-item style="text-align: center;">
-            <paper-item-body two-line >
-              <div>
-                <p style="font-weight: bold; color: rgb(60, 60, 100);">Miss. C.G. Veelenturf</p>
-                <p style="color:#69BFEE; margin-top: -15px;">NL12 INGB 000873246</p>
-                <h1 style="font-size: 30px; font-weight: bold; color: rgb(60, 60, 100)">€ 2.567,50</h1>
-              </div>
-            </paper-item-body>
-          </paper-item>
-        </paper-slide>
-        <paper-slide>
-          <paper-item style="text-align: center;">
-            <paper-item-body two-line >
-              <div>
-                <p style="font-weight: bold; color: rgb(60, 60, 100)">Mr. H.E.B. Geengeld</p>
-                <p style="color:#69BFEE; margin-top: -15px;">NL88 RABO 013371337</p>
-                <h1 style="font-size: 30px; font-weight: bold; color: rgb(60, 60, 100)">€ 0,10</h1>
-              </div>
-            </paper-item-body>
-          </paper-item>
-        </paper-slide>
-        <paper-slide>
-          <paper-item style="text-align: center;">
-            <paper-item-body two-line >
-              <div>
-                <p style="font-weight: bold; color: rgb(60, 60, 100);">Miss. A.B. Mercado</p>
-                <p style="color:#69BFEE; margin-top: -15px;">NL11 ABNA 012345678</p>
-                <h1 style="font-size: 30px; font-weight: bold; color: rgb(60, 60, 100)">€ 14.234,00</h1>
-              </div>
-            </paper-item-body>
-          </paper-item>
-        </paper-slide>
-      </l2t-paper-slider>
-      <paper-item style="color:white;background-color: #69BFEE; margin:0;">
-        <paper-item-body two-line on-tap="open" >
-          <div style="border-bottom:1px solid #FFFFFF;">
-            <p style="text-align:center;">Select the amount you want to withdraw</p>
-          </div>
-          <div>
-            <h1>&nbsp;</h1>
-          </div>
-        </paper-item-body>
-      </paper-item>
-      <paper-item>
-        <paper-item-body style="padding-top:20px;" >
-          <div>
-            <paper-button style="width:33%;height:80px;font-size: large; border-right:3px solid #E4F1F4; border-bottom:3px solid #E4F1F4; margin-left:-3px;">€ 20</paper-button>
-            <paper-button style="width:33%;height:80px;font-size: large; border-bottom:3px solid #E4F1F4; margin-left:-10px; margin-right:-10px;">€ 40</paper-button>
-            <paper-button style="width:33%;height:80px;font-size: large; border-left:3px solid #E4F1F4; border-bottom:3px solid #E4F1F4; margin-right:-10px;">€ 80</paper-button>
-          </div>
-          <div>
-            <paper-button style="width:33%;height:80px;font-size: large; border-right:3px solid #E4F1F4; margin-left:-3px;">€ 100</paper-button>
-            <paper-button style="width:33%;height:80px;font-size: large; margin-left:-10px; margin-right:-10px;">€ 200</paper-button>
-            <paper-button style="width:33%;height:80px;font-size: large; border-left:3px solid #E4F1F4; margin-right:-10px;">€ 500</paper-button>
-          </div>
-        </paper-item-body>
-      </paper-item>
-    </paper-listbox>
-      </div>
+        </style>
+
+        <iron-pages selected="0">
+            <div>
+                <google-map disable-default-ui on-tap="open" latitude="{{lat}}" longitude="{{lon}}" zoom="15"
+                            api-key="AIzaSyDVzFXpV8VxfUstBV1A-5OA9jK0uudrTAE"></google-map>
+            </div>
+            <div>
+                <h2 style="text-align: center; color: grey; border-top: 0.5px solid rgb(160, 195, 210); border-bottom: 0.5px solid rgb(160, 195, 210); font-size: 16px; padding: 10px 0px 10px 0px;">
+                    Selected Bank Account</h2>
+                <paper-listbox style="font-family: 'Helvetica Neue'">
+                    <l2t-paper-slider class="accountSlides" total-slides="3">
+                        <paper-slide>
+                            <paper-item style="text-align: center;">
+                                <paper-item-body two-line>
+                                    <div>
+                                        <p style="font-weight: bold; color: rgb(60, 60, 100);">Miss. C.G. Veelenturf</p>
+                                        <p style="color:#69BFEE; margin-top: -15px;">NL12 INGB 000873246</p>
+                                        <h1 style="font-size: 30px; font-weight: bold; color: rgb(60, 60, 100)">€
+                                            2.567,50</h1>
+                                    </div>
+                                </paper-item-body>
+                            </paper-item>
+                        </paper-slide>
+                        <paper-slide>
+                            <paper-item style="text-align: center;">
+                                <paper-item-body two-line>
+                                    <div>
+                                        <p style="font-weight: bold; color: rgb(60, 60, 100)">Mr. H.E.B. Geengeld</p>
+                                        <p style="color:#69BFEE; margin-top: -15px;">NL88 RABO 013371337</p>
+                                        <h1 style="font-size: 30px; font-weight: bold; color: rgb(60, 60, 100)">€
+                                            0,10</h1>
+                                    </div>
+                                </paper-item-body>
+                            </paper-item>
+                        </paper-slide>
+                        <paper-slide>
+                            <paper-item style="text-align: center;">
+                                <paper-item-body two-line>
+                                    <div>
+                                        <p style="font-weight: bold; color: rgb(60, 60, 100);">Miss. A.B. Mercado</p>
+                                        <p style="color:#69BFEE; margin-top: -15px;">NL11 ABNA 012345678</p>
+                                        <h1 style="font-size: 30px; font-weight: bold; color: rgb(60, 60, 100)">€
+                                            14.234,00</h1>
+                                    </div>
+                                </paper-item-body>
+                            </paper-item>
+                        </paper-slide>
+                    </l2t-paper-slider>
+                    <paper-item style="color:white;background-color: #69BFEE; margin:0;">
+                        <paper-item-body two-line on-tap="open">
+                            <div style="border-bottom:1px solid #FFFFFF;">
+                                <p style="text-align:center;">Select the amount you want to withdraw</p>
+                            </div>
+                            <div>
+                                <h1>&nbsp;</h1>
+                            </div>
+                        </paper-item-body>
+                    </paper-item>
+                    <paper-item>
+                        <paper-item-body style="padding-top:20px;">
+                            <div>
+                                <paper-button
+                                        style="width:33%;height:80px;font-size: large; border-right:3px solid #E4F1F4; border-bottom:3px solid #E4F1F4; margin-left:-3px;">
+                                    € 20
+                                </paper-button>
+                                <paper-button
+                                        style="width:33%;height:80px;font-size: large; border-bottom:3px solid #E4F1F4; margin-left:-10px; margin-right:-10px;">
+                                    € 40
+                                </paper-button>
+                                <paper-button
+                                        style="width:33%;height:80px;font-size: large; border-left:3px solid #E4F1F4; border-bottom:3px solid #E4F1F4; margin-right:-10px;">
+                                    € 80
+                                </paper-button>
+                            </div>
+                            <div>
+                                <paper-button
+                                        style="width:33%;height:80px;font-size: large; border-right:3px solid #E4F1F4; margin-left:-3px;">
+                                    € 100
+                                </paper-button>
+                                <paper-button
+                                        style="width:33%;height:80px;font-size: large; margin-left:-10px; margin-right:-10px;">
+                                    € 200
+                                </paper-button>
+                                <paper-button
+                                        style="width:33%;height:80px;font-size: large; border-left:3px solid #E4F1F4; margin-right:-10px;">
+                                    € 500
+                                </paper-button>
+                            </div>
+                        </paper-item-body>
+                    </paper-item>
+                </paper-listbox>
+            </div>
 
 
+        </iron-pages>
 
-    </iron-pages>
-
-    <paper-dialog dynamic-align="true" id="dialog" class="size-position">
-      <h3>Withdraw {{prop1}} euros</h3>
+        <paper-dialog dynamic-align="true" id="dialog" class="size-position">
+            <h3>Withdraw {{prop1}} euros</h3>
 
 
-      <paper-button dialog-dismiss>Cancel</paper-button>
-      <paper-button dialog-confirm autofocus on-tap="nextpage">Withdraw</paper-button>
+            <paper-button dialog-dismiss>Cancel</paper-button>
+            <paper-button dialog-confirm autofocus on-tap="nextpage">Withdraw</paper-button>
 
-    </paper-dialog>
-  </template>
+        </paper-dialog>
+
+        <iron-ajax
+                id="requestBeacons"
+                url="https://hola-supermercado.herokuapp.com/beacons"
+                handle-as="json"
+                on-response="handleResponse" xhr>
+        </iron-ajax>
+    </template>
 
     <script>
         Polymer({
@@ -157,8 +189,13 @@
             nextpage: function() {
                 var pages = document.querySelector('iron-pages')
                 pages.selectNext()
+            },
+            ready: function () {
+                this.$.requestBeacons.generateRequest();
+            },
+            handleResponse: function (data) {
+                console.log(data.detail.response);
             }
-
         });
     </script>
 </dom-module>
