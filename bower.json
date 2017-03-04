@@ -6,7 +6,8 @@
     "google-map": "GoogleWebComponents/google-map#^1.0.0",
     "paper-elements": "PolymerElements/paper-elements#^1.0.7",
     "app-layout": "PolymerElements/app-layout#^0.10.6",
-    "iron-pages": "PolymerElements/iron-pages#^1.0.8"
+    "iron-pages": "PolymerElements/iron-pages#^1.0.8",
+    "l2t-paper-slider": "^1.2.8"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
