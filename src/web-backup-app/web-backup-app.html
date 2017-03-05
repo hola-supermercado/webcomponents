@@ -21,8 +21,6 @@
         height: 736px;
       }
 
-
-
         </style>
         <style is="custom-style">
 
@@ -44,15 +42,14 @@
         --paper-slide-dot-selected: rgb(60, 60, 100);
       }
 
+
+
         </style>
 
         <iron-pages selected="0">
             <div>
-                <google-map disable-default-ui on-tap="open" latitude="{{beacon1_lat}}" longitude="{{beacon1_lon}}" zoom="18"
+                <google-map disable-default-ui on-tap="open" latitude="{{lat}}" longitude="{{lon}}" zoom="18"
                             api-key="AIzaSyDVzFXpV8VxfUstBV1A-5OA9jK0uudrTAE">
-                    <google-map-marker latitude="{{beacon1_lat}}" longtitude="{{beacon1_lon}}" ></google-map-marker>
-                    <google-map-marker latitude="{{beacon2_lat}}" longtitude="{{beacon2_lon}}" ></google-map-marker>
-
                 </google-map>
             </div>
             <div>
@@ -174,10 +171,6 @@
                 },
                 lon: String,
                 lat: String,
-                beacon1_lon:String,
-                beacon1_lat:String,
-                beacon2_lon:String,
-                beacon2_lat:String
             },
             created: function() {
 
@@ -206,10 +199,19 @@
                 var coords = data.detail.response;
                 console.log(coords)
 
-                this.beacon1_lat = coords.beacons[0].lat;
-                this.beacon1_lon = coords.beacons[0].lon;
-                this.beacon2_lat = coords.beacons[1].lat;
-                this.beacon2_lon = coords.beacons[1].lon;
+                var gmap = document.querySelector('google-map');
+
+                var marker1 = document.createElement('google-map-marker');
+                marker1.setAttribute('latitude', coords.beacons[0].lat);
+                marker1.setAttribute('longitude', coords.beacons[0].lon);
+                marker1.setAttribute('icon', 'https://uproxx.files.wordpress.com/2013/03/bender13.gif?w=30');
+                Polymer.dom(gmap).appendChild(marker1);
+
+                var marker2 = document.createElement('google-map-marker');
+                marker2.setAttribute('latitude', coords.beacons[1].lat);
+                marker2.setAttribute('longitude', coords.beacons[1].lon);
+                marker2.setAttribute('icon', 'https://uproxx.files.wordpress.com/2013/03/bender13.gif?w=30');
+                Polymer.dom(gmap).appendChild(marker2);
             }
         });
     </script>
