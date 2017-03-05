@@ -9,6 +9,7 @@
 <link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
 
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../bower_components/l2t-paper-slider/l2t-paper-slider.html">
@@ -36,17 +37,18 @@
       }
 
       .accountSlides {
-        --paper-slide-width: 360px;
+        --paper-slide-width: 400px;
         --paper-slide-height: 170px;
         --paper-slide-dot: rgb(160, 195, 210);
         --paper-slide-dot-selected: rgb(60, 60, 100);
       }
+/*<<<<<<< Updated upstream*/
 
 
 
         </style>
 
-        <iron-pages selected="0">
+        <!-- <iron-pages selected="0">
             <div>
                 <google-map disable-default-ui on-tap="open" latitude="{{lat}}" longitude="{{lon}}" zoom="18"
                             api-key="AIzaSyDVzFXpV8VxfUstBV1A-5OA9jK0uudrTAE">
@@ -158,6 +160,104 @@
                 on-response="handleResponse" xhr>
         </iron-ajax>
     </template>
+=======
+    </style> -->
+
+    <iron-pages selected="0">
+      <div>
+    <google-map disable-default-ui on-tap="open" latitude="{{lat}}" longitude="{{lon}}" zoom="18" api-key="AIzaSyDVzFXpV8VxfUstBV1A-5OA9jK0uudrTAE"></google-map>
+      </div>
+      <div>
+      <div style="text-align: center; margin-bottom: -20px;">
+        <iron-image style="width:40px; height:40px;" sizing="contain"  src="../assets/icon.png"></iron-image>
+      </div>
+        <paper-item>
+          <h2 style="text-align: center; color: grey; border-top: 0.5px solid rgb(160, 195, 210); border-bottom: 0.5px solid rgb(160, 195, 210); font-size: 16px; padding: 10px 0px 10px 0px; width:100%; text-align:center; font-weight:normal;">Selected Bank Account</h2>
+        </paper-item>
+    <paper-listbox style="font-family: 'Helvetica Neue'">
+      <l2t-paper-slider class="accountSlides" total-slides="3">
+        <paper-slide>
+          <paper-item style="text-align: center;">
+            <paper-item-body two-line >
+              <div>
+                <p style="font-weight: normal; color: rgb(60, 60, 100);">Miss. C.G. Veelenturf</p>
+                <p style="color:#69BFEE; margin-top: -15px;">NL12 INGB 000873246</p>
+                <h1 style="font-size: 30px; font-weight: bold; color: rgb(60, 60, 100)">€ 2.567,50</h1>
+              </div>
+            </paper-item-body>
+          </paper-item>
+        </paper-slide>
+        <paper-slide>
+          <paper-item style="text-align: center;">
+            <paper-item-body two-line >
+              <div>
+                <p style="font-weight: normal; color: rgb(60, 60, 100)">Miss. C.G. Veelenturf</p>
+                <p style="color:#69BFEE; margin-top: -15px;">NL12 INGB 013371337</p>
+                <h1 style="font-size: 30px; font-weight: bold; color: rgb(60, 60, 100)">€ 0,10</h1>
+              </div>
+            </paper-item-body>
+          </paper-item>
+        </paper-slide>
+        <paper-slide>
+          <paper-item style="text-align: center;">
+            <paper-item-body two-line >
+              <div >
+                <p style="font-weight: normal; color: rgb(60, 60, 100);">Miss. C.G. Veelenturf</p>
+                <p style="color:#69BFEE; margin-top: -15px;">NL12 INGB 012345678</p>
+                <h1 style="font-size: 30px; font-weight: bold; color: rgb(60, 60, 100)">€ 14.234,00</h1>
+              </div>
+            </paper-item-body>
+          </paper-item>
+        </paper-slide>
+      </l2t-paper-slider>
+      <paper-item style="color:white;background-color: #69BFEE; margin:0; height: 200px;">
+        <paper-item-body two-line on-tap="open" >
+          <div style="border-bottom:1px solid #FFFFFF;">
+            <p style="text-align:center;">Select the amount you want to withdraw</p>
+          </div>
+          <div style="text-align: center; background-color: #69BFEE;">
+            <!-- <h1>&nbsp;</h1> -->
+            <input is="iron-input" value="€ {{myAmount}}" prevent-invalid-input allowed-pattern="[0-9]" style="padding: 10px; text-align: center; width: 60%; font-size: 24px; font-weight: bold; color: white; background-color: #69BFEE; border: none;">
+          </div>
+        </paper-item-body>
+      </paper-item>
+      <paper-item>
+        <paper-item-body style="padding-top:20px;" >
+          <div>
+            <paper-button on-tap="setAmount20" style="width:33%;height:80px;font-size: large; border-right:3px solid #E4F1F4; border-bottom:3px solid #E4F1F4; margin-left:-3px;">€ 20</paper-button>
+            <paper-button on-tap="setAmount40" style="width:33%;height:80px;font-size: large; border-bottom:3px solid #E4F1F4; margin-left:-10px; margin-right:-10px;">€ 40</paper-button>
+            <paper-button on-tap="setAmount80" style="width:33%;height:80px;font-size: large; border-left:3px solid #E4F1F4; border-bottom:3px solid #E4F1F4; margin-right:-10px;">€ 80</paper-button>
+          </div>
+          <div>
+            <paper-button on-tap="setAmount100" style="width:33%;height:80px;font-size: large; border-right:3px solid #E4F1F4; margin-left:-3px;">€ 100</paper-button>
+            <paper-button on-tap="setAmount200" style="width:33%;height:80px;font-size: large; margin-left:-10px; margin-right:-10px;">€ 200</paper-button>
+            <paper-button on-tap="setAmount500" style="width:33%;height:80px;font-size: large; border-left:3px solid #E4F1F4; margin-right:-10px;">€ 500</paper-button>
+          </div>
+        </paper-item-body>
+      </paper-item>
+    </paper-listbox>
+      </div>
+
+
+
+    </iron-pages>
+
+    <paper-dialog dynamic-align="true" id="dialog" class="size-position">
+      <h3>Withdraw {{prop1}} euros</h3>
+
+
+      <paper-button dialog-dismiss>Cancel</paper-button>
+      <paper-button dialog-confirm autofocus on-tap="nextpage">Withdraw</paper-button>
+
+    </paper-dialog>
+    <iron-ajax
+            id="requestBeacons"
+            url="https://hola-supermercado.herokuapp.com/beacons"
+            handle-as="json"
+            on-response="handleResponse" xhr>
+    </iron-ajax>
+  </template>
+<!-- /*>>>>>>> Stashed changes*/ -->
 
     <script>
         Polymer({
@@ -171,6 +271,10 @@
                 },
                 lon: String,
                 lat: String,
+/*<<<<<<< Updated upstream
+=======*/
+                myAmount: String
+/*>>>>>>> Stashed changes*/
             },
             created: function() {
 
@@ -194,6 +298,7 @@
                 var pages = document.querySelector('iron-pages')
                 pages.selectNext()
             },
+/*<<<<<<< Updated upstream*/
 
             handleResponse: function (data) {
                 var coords = data.detail.response;
@@ -212,7 +317,37 @@
                 marker2.setAttribute('longitude', coords.beacons[1].lon);
                 marker2.setAttribute('icon', 'https://uproxx.files.wordpress.com/2013/03/bender13.gif?w=30');
                 Polymer.dom(gmap).appendChild(marker2);
+            },
+/*=======*/
+            setAmount20: function() {
+                var _this = this;
+                _this.myAmount = "20,00";
+            },
+            setAmount40: function() {
+                var _this = this;
+                _this.myAmount = "40,00";
+            },
+            setAmount80: function() {
+                var _this = this;
+                _this.myAmount = "80,00";
+            },
+            setAmount100: function() {
+                var _this = this;
+                _this.myAmount = "100,00";
+            },
+            setAmount200: function() {
+                var _this = this;
+                _this.myAmount = "200,00";
+            },
+            setAmount500: function() {
+                var _this = this;
+                _this.myAmount = "500,00";
             }
+
+
+
+
+/*>>>>>>> Stashed changes*/
         });
     </script>
 </dom-module>
