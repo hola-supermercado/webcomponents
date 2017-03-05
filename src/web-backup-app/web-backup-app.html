@@ -1,7 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/google-map/google-map.html">
-
+<link rel="import" href="../../bower_components/google-map/google-map-marker.html">
 
 <link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
@@ -48,8 +48,12 @@
 
         <iron-pages selected="0">
             <div>
-                <google-map disable-default-ui on-tap="open" latitude="{{lat}}" longitude="{{lon}}" zoom="15"
-                            api-key="AIzaSyDVzFXpV8VxfUstBV1A-5OA9jK0uudrTAE"></google-map>
+                <google-map disable-default-ui on-tap="open" latitude="{{beacon1_lat}}" longitude="{{beacon1_lon}}" zoom="18"
+                            api-key="AIzaSyDVzFXpV8VxfUstBV1A-5OA9jK0uudrTAE">
+                    <google-map-marker latitude="{{beacon1_lat}}" longtitude="{{beacon1_lon}}" ></google-map-marker>
+                    <google-map-marker latitude="{{beacon2_lat}}" longtitude="{{beacon2_lon}}" ></google-map-marker>
+
+                </google-map>
             </div>
             <div>
                 <h2 style="text-align: center; color: grey; border-top: 0.5px solid rgb(160, 195, 210); border-bottom: 0.5px solid rgb(160, 195, 210); font-size: 16px; padding: 10px 0px 10px 0px;">
@@ -169,7 +173,11 @@
                     value: 50
                 },
                 lon: String,
-                lat: String
+                lat: String,
+                beacon1_lon:String,
+                beacon1_lat:String,
+                beacon2_lon:String,
+                beacon2_lat:String
             },
             created: function() {
 
@@ -181,6 +189,9 @@
 
                 })
             },
+            ready:function(){
+                this.$.requestBeacons.generateRequest();
+            },
             open: function() {
 
                 var dialog = document.querySelector('#dialog')
@@ -190,11 +201,15 @@
                 var pages = document.querySelector('iron-pages')
                 pages.selectNext()
             },
-            ready: function () {
-                this.$.requestBeacons.generateRequest();
-            },
+
             handleResponse: function (data) {
-                console.log(data.detail.response);
+                var coords = data.detail.response;
+                console.log(coords)
+
+                this.beacon1_lat = coords.beacons[0].lat;
+                this.beacon1_lon = coords.beacons[0].lon;
+                this.beacon2_lat = coords.beacons[1].lat;
+                this.beacon2_lon = coords.beacons[1].lon;
             }
         });
     </script>
