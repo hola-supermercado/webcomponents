@@ -250,8 +250,20 @@
         <iron-image style="width:100px; height: 100px;" sizing="contain" src="../assets/fingerprint.png"></iron-image>
       </div>
         <div class="buttons">
-            <paper-button dialog-confirm autofocus>Verify</paper-button>
+            <paper-button dialog-confirm autofocus onclick="actions.open()">Verify</paper-button>
         </div>
+    </paper-dialog>
+
+    <paper-dialog id="actions">
+      <h2>Transaction Complete</h2>
+      <p>Don't forget to take out your money!</p>
+      <div style="text-align: center;">
+      <iron-image style="width:150px; height: 150px;" sizing="contain" src="../assets/takemoney.png"></iron-image>
+    </div>
+      <div class="buttons">
+        <paper-button dialog-dismiss>Print Receipt</paper-button>
+        <paper-button dialog-confirm autofocus>No Receipt</paper-button>
+      </div>
     </paper-dialog>
 
     <paper-dialog dynamic-align="true" id="dialog" class="size-position">
@@ -298,7 +310,6 @@
                 this.$.requestBeacons.generateRequest();
             },
             open: function() {
-
                 var dialog = document.querySelector('#dialog')
                 dialog.open()
             },
